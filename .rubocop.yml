@@ -1,0 +1,34 @@
+require:
+  - rubocop-capybara
+  - rubocop-factory_bot
+  - rubocop-faker
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - bin/*
+    - lib/tasks/auto_annotate_models.rake
+
+Metrics/BlockLength:
+  Description: 'Checks if the length of a block exceeds some maximum value.'
+  StyleGuide: 'https://docs.rubocop.org/rubocop/cops_metrics.html#metricsblocklength'
+  Max: 25
+  Exclude:
+    - spec/**/*
+    - config/environments/*
+
+Style/Documentation:
+  Description: 'Checks for missing top-level documentation of classes and modules.'
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Description: 'Helps you transition from mutable string literals to frozen string literals.'
+  Include:
+    - app/**/*
+    - spec/**/*
+  Exclude:
+    - spec/*
+    - spec/support/*
