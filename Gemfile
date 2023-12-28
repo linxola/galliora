@@ -85,6 +85,7 @@ end
 gem 'bootstrap', '~> 5.3.2'
 gem 'carrierwave', '~> 3.0'
 gem 'dartsass-sprockets'
+gem 'devise', '~> 4.9'
 gem 'friendly_id', '~> 5.4.0'
 gem 'haml-rails', '~> 2.0'
 gem 'pagy', '~> 6.2'
