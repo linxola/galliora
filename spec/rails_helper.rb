@@ -11,6 +11,7 @@ SimpleCov.start 'rails' do
   add_filter 'app/channels'
 end
 # Add additional requires below this line. Rails is not loaded until this point!
+require 'support/devise'
 require 'support/factory_bot'
 require 'support/shoulda_matchers'
 
