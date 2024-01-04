@@ -35,9 +35,18 @@ class User < ApplicationRecord
   devise :database_authenticatable, :confirmable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  attr_accessor :login
+
   validates :username, # The regex assures that username complies with POSIX.1-2017 standard
             format: { with: /\A\w[\w.-]{1,31}\z/, message: I18n.t('user.errors.username') },
-            presence: true, uniqueness: true
+            presence: true, uniqueness: { case_sensitive: false }
   validates :name, length: { maximum: 64 }
   validates :about, length: { maximum: 256 }
+
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    login = conditions.delete(:login)
+    where(conditions).where(['lower(username) = :value OR lower(email) = :value',
+                             { value: login.strip.downcase }]).first
+  end
 end
