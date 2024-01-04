@@ -28,4 +28,6 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  user:
+    errors:
+      username: "Username must be 2 to 32 chars long and can contain only letters, numbers, periods(.), underscores(_), and hyphens(-)"
