@@ -5,9 +5,11 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  # :nocov:
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit :sign_up, keys: %i[username]
     devise_parameter_sanitizer.permit :sign_in, keys: %i[login]
     devise_parameter_sanitizer.permit :account_update, keys: %i[username name about]
   end
+  # :nocov:
 end
