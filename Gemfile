@@ -50,6 +50,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'haml_lint', require: false
   gem 'rspec-rails', '~> 6.1.0'
   gem 'rubocop', '~> 1.58', require: false
   gem 'rubocop-capybara', require: false
