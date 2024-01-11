@@ -12,7 +12,7 @@ RSpec.describe 'Landing page' do
   it 'shows link-button that redirects user to home page or login/register screen' do
     click_link 'Explore'
 
-    expect(page).to have_current_path('/')
+    expect(page).to have_current_path(new_user_registration_url)
   end
 
   it 'shows a link to an author of a background image' do

@@ -30,6 +30,12 @@ Metrics/BlockLength:
     - spec/**/*
     - config/environments/*
 
+Rails/LinkToBlank:
+  Description: >-
+    Checks that `link_to` with a `target: "_blank"` have a `rel: "noopener"` option passed to them.
+    (Not relevant anymore since all modern browsers implement this functionality automatically)
+  Enabled: false
+
 Style/Documentation:
   Description: 'Checks for missing top-level documentation of classes and modules.'
   Enabled: false
