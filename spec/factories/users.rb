@@ -31,10 +31,11 @@
 #
 FactoryBot.define do
   factory :user do
+    about { Faker::Lorem.paragraph }
     confirmed_at { Time.zone.now }
     sequence(:email) { |n| "user#{n}@example.com" }
     password { SecureRandom.hex(10) }
-    sequence(:name) { Faker::Name.name }
+    name { Faker::Name.name }
     sequence(:username) { |n| "user#{n}" }
   end
 end
