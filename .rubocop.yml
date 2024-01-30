@@ -36,6 +36,12 @@ Rails/LinkToBlank:
     (Not relevant anymore since all modern browsers implement this functionality automatically)
   Enabled: false
 
+Rails/OutputSafety:
+  Description: 'This cop checks for the use of output safety calls like html_safe and raw.'
+  StyleGuide: 'https://www.rubydoc.info/gems/rubocop/0.41.2/RuboCop/Cop/Rails/OutputSafety'
+  Exclude:
+    - config/initializers/*
+
 Style/Documentation:
   Description: 'Checks for missing top-level documentation of classes and modules.'
   Enabled: false
