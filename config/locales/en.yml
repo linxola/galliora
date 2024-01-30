@@ -28,6 +28,21 @@
 #       enabled: "ON"
 
 en:
-  user:
+  activerecord:
     errors:
-      username: "Username must be 2 to 32 chars long and can contain only letters, numbers, periods(.), underscores(_), and hyphens(-)"
+      models:
+        user:
+          attributes:
+            email:
+              blank: "Email can't be blank"
+            password:
+              blank: "Password can't be blank"
+              too_short: "Password must be minimum 8 characters long"
+            username:
+              too_short: "Username must be minimum 2 characters long"
+              too_long: "Username can be maximum 32 characters long"
+              invalid: "Username can contain only letters, numbers, underscores, hyphens(not leading) and periods"
+  user:
+    tooltips:
+      password: "Password must be minimum 8 characters long"
+      username: "Username must be 2-32 long and can contain only letters, numbers, underscores, hyphens(not leading) and periods"
