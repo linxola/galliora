@@ -1,0 +1,116 @@
+/****************************************/
+/* Background image and its blur filter */
+/****************************************/
+.sing-up-image {
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.sing-up-image:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+}
+
+/************************************/
+/* Registration form and its fields */
+/************************************/
+.sign-up-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  max-width: 300px;
+}
+
+/* Whole input form */
+.sign-up-form .form-floating {
+  color: white;
+  margin: 0.5rem auto 0;
+}
+
+/* Input field of an input form */
+.sign-up-form .form-control {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: transparent;
+  transition: background .3s, border .3s, box-shadow .3s;
+}
+
+.sign-up-form .form-control:focus,
+.sign-up-form .form-control:hover {
+  color: white;
+  background-color: transparent;
+  border-color: white;
+  box-shadow: rgba(0, 0, 0, 0.075) 0 1px 1px inset, rgba(255, 255, 255, 0.6) 0 0 8px;
+}
+
+/* Make background of input field's label transparent */
+.sign-up-form .form-floating > input + label:after {
+  background: transparent !important;
+}
+
+/* Label of input field when typing */
+.sign-up-form .form-control:focus + label {
+  color: white;
+}
+
+/* Label of input field when the field is not empty */
+.sign-up-form .form-control:not(:placeholder-shown) + label {
+  color: silver;
+}
+
+/* Class of the field with invalid input */
+.sign-up-form .is-invalid {
+  border-color: red;
+}
+
+.sign-up-form .is-invalid:focus,
+.sign-up-form .is-invalid:hover {
+  border-color: red;
+  box-shadow: rgba(0, 0, 0, 0.075) 0 1px 1px inset, rgba(255, 0, 0, 0.6) 0 0 8px;
+}
+
+/* Input field's errors div */
+.sign-up-form .invalid-feedback {
+  display: block;
+  text-align: start;
+  padding-left: 1.5%;
+  font-size: small;
+}
+
+/* Submit button */
+.sign-up-form .btn-light {
+  width: 100%;
+  margin: 0.5rem auto;
+  border: none;
+  padding: 10px;
+  text-align: center;
+  transition: background-color .3s, color .3s, box-shadow .3s;
+}
+
+.sign-up-form .btn-light:hover {
+  background-color: black;
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.075) 0 1px 1px inset, rgba(255, 255, 255, 0.6) 0 0 8px;
+}
+
+.sign-up-form hr {
+  width: 75%;
+  margin: 1rem auto;
+}
+
+.sign-up-form a {
+  color: white;
+  transition: color .3s;
+}
+
+.sign-up-form a:hover {
+  color: gray;
+}

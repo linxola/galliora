@@ -38,9 +38,9 @@ class User < ApplicationRecord
 
   attr_accessor :login
 
-  validates :username, # The regex assures that username complies with POSIX.1-2017 standard
-            format: { with: /\A\w[\w.-]{1,31}\z/, message: I18n.t('user.errors.username') },
-            presence: true, uniqueness: { case_sensitive: false }
+  # TODO: change tests for username validation
+  validates :username, length: { in: 2..32 }, uniqueness: { case_sensitive: false },
+                       format: { with: /\A\w?\z|\A\w[\w.-]+\z/ } # Assures POSIX.1-2017 compliance
   validates :name, length: { maximum: 64 }
   validates :about, length: { maximum: 256 }
 

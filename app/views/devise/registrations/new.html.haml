@@ -1,26 +1,35 @@
-%h2 Sign up
+- provide :title, 'Join Galliora'
 
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = render 'devise/shared/error_messages', resource:
+.sing-up-image{ style: "background-image: url(#{image_path('mountains-Andy-Bay-pixabay.jpg')})" }
+.overlay
+.sign-up-form
+  %h1 Join Galliora
 
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: 'email'
+  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    .form-floating
+      = f.text_field :username, autofocus: true, autocomplete: 'username', class: 'form-control',
+                                placeholder: 'Username',
+                                data: { 'bs-toggle': 'tooltip',
+                                        'bs-placement': 'right',
+                                        'bs-title': I18n.t('user.tooltips.username') }
+      = f.label :username
+    = render 'devise/shared/error_messages', resource:, field: :username
 
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      %em (#{@minimum_password_length} characters minimum)
-    %br/
-    = f.password_field :password, autocomplete: 'new-password'
+    .form-floating
+      = f.email_field :email, autocomplete: 'email', class: 'form-control', placeholder: 'Email'
+      = f.label :email
+    = render 'devise/shared/error_messages', resource:, field: :email
 
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: 'new-password'
+    .form-floating
+      = f.password_field :password, autocomplete: 'new-password', class: 'form-control',
+                                    placeholder: 'Password',
+                                    data: { 'bs-toggle': 'tooltip',
+                                            'bs-placement': 'right',
+                                            'bs-title': I18n.t('user.tooltips.password') }
+      = f.label :password
+    = render 'devise/shared/error_messages', resource:, field: :password
 
-  .actions
-    = f.submit 'Sign up'
+    = f.submit 'SIGN UP', class: 'btn btn-light'
 
-= render 'devise/shared/links'
+  %hr
+  = render 'devise/shared/links'
