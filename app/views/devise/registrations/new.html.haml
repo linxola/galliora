@@ -5,29 +5,42 @@
 .sign-up-form
   %h1 Join Galliora
 
-  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-    .form-floating
+  = form_for(resource, as: resource_name, url: registration_path(resource_name),
+                       data: { controller: 'registration',
+                               action: 'registration#submitForm' }) do |f|
+    .form-floating#username_form
       = f.text_field :username, autofocus: true, autocomplete: 'username', class: 'form-control',
                                 placeholder: 'Username',
                                 data: { 'bs-toggle': 'tooltip',
                                         'bs-placement': 'right',
-                                        'bs-title': I18n.t('user.tooltips.username') }
+                                        'bs-title': I18n.t('user.tooltips.username'),
+                                        controller: 'registration',
+                                        action: 'blur->registration#validateUsername' }
       = f.label :username
     = render 'devise/shared/error_messages', resource:, field: :username
 
-    .form-floating
-      = f.email_field :email, autocomplete: 'email', class: 'form-control', placeholder: 'Email'
+    .form-floating#email_form
+      = f.text_field :email, autocomplete: 'email', class: 'form-control', placeholder: 'Email',
+                             data: { controller: 'registration',
+                                     action: 'blur->registration#validateEmail' }
       = f.label :email
     = render 'devise/shared/error_messages', resource:, field: :email
 
-    .form-floating
-      = f.password_field :password, autocomplete: 'new-password', class: 'form-control',
-                                    placeholder: 'Password',
-                                    data: { 'bs-toggle': 'tooltip',
-                                            'bs-placement': 'right',
-                                            'bs-title': I18n.t('user.tooltips.password') }
-      = f.label :password
-    = render 'devise/shared/error_messages', resource:, field: :password
+    .input-group.has-validation
+      .form-floating#password_form
+        = f.password_field :password, autocomplete: 'new-password', class: 'form-control',
+                                      placeholder: 'Password',
+                                      data: { 'bs-toggle': 'tooltip',
+                                              'bs-placement': 'right',
+                                              'bs-title': I18n.t('user.tooltips.password'),
+                                              controller: 'registration',
+                                              action: 'blur->registration#validatePassword' }
+        = f.label :password
+        %span.password-toggle
+          %i.bi.bi-eye{ 'data-controller': 'registration',
+                        'data-registration-target': 'visibilityIcon',
+                        'data-action': 'click->registration#switchPasswordVisibility' }
+      = render 'devise/shared/error_messages', resource:, field: :password
 
     = f.submit 'SIGN UP', class: 'btn btn-light'
 

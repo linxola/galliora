@@ -10,6 +10,8 @@
 
     = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
     = javascript_importmap_tags
+    :javascript
+      window.I18n = #{t('activerecord.errors.models.user.attributes').to_json.html_safe}
 
   %body
     = yield

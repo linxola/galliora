@@ -35,9 +35,11 @@ en:
           attributes:
             email:
               blank: "Email can't be blank"
+              invalid: "Email is invalid"
             password:
               blank: "Password can't be blank"
               too_short: "Password must be minimum 8 characters long"
+              too_long: "Password can be maximum 128 characters long"
             username:
               too_short: "Username must be minimum 2 characters long"
               too_long: "Username can be maximum 32 characters long"
