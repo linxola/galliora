@@ -69,6 +69,8 @@
 /* Class of the field with invalid input */
 .sign-up-form .is-invalid {
   border-color: red;
+  background-image: none;
+  padding-right: 0.75rem;
 }
 
 .sign-up-form .is-invalid:focus,
@@ -83,6 +85,29 @@
   text-align: start;
   padding-left: 1.5%;
   font-size: small;
+}
+
+/* Password visibility toggle */
+.sign-up-form #password_form > input {
+  padding-right: 3rem;
+}
+
+.sign-up-form .password-toggle {
+  position: absolute;
+  width: 48px;
+  bottom: 0.6rem;
+  right: 0;
+  font-size: 1.5rem;
+  background-color: transparent;
+}
+
+.sign-up-form .password-toggle i {
+  cursor: pointer;
+  pointer-events: all;
+}
+
+.sign-up-form .password-toggle i:hover {
+  color: silver;
 }
 
 /* Submit button */
@@ -101,6 +126,7 @@
   box-shadow: rgba(0, 0, 0, 0.075) 0 1px 1px inset, rgba(255, 255, 255, 0.6) 0 0 8px;
 }
 
+/* Horizontal line and links styling */
 .sign-up-form hr {
   width: 75%;
   margin: 1rem auto;
