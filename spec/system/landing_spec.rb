@@ -16,6 +16,6 @@ RSpec.describe 'Landing page' do
   end
 
   it 'shows a link to an author of a background image' do
-    expect(page).to have_link('Yves from Pixabay', href: 'https://pixabay.com/users/ykaiavu-7068951/')
+    expect(page).to have_link('Andy Bay from Pixabay', href: 'https://pixabay.com/users/andy_bay-1006510/')
   end
 end
