@@ -1,11 +1,6 @@
 - provide :title, 'Join Galliora'
 
-.bg-img.bg-blur{ style: "background-image: url(#{image_path('mountains-Andy-Bay-pixabay.jpg')})" }
-  %p.bg-img-author
-    Image by
-    = link_to 'Andy Bay from Pixabay', 'https://pixabay.com/users/andy_bay-1006510/',
-              class: 'link-light', target: '_blank'
-.bg-overlay
+.bg-blur= render 'shared/background_image'
 .content-center.sign-up-form
   %h1 Join Galliora
 
