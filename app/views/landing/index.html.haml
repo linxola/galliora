@@ -1,11 +1,6 @@
 - provide :title, 'Welcome!'
 
-.bg-img{ style: "background-image: url(#{image_path('mountains-Andy-Bay-pixabay.jpg')})" }
-  %p.bg-img-author
-    Image by
-    = link_to 'Andy Bay from Pixabay', 'https://pixabay.com/users/andy_bay-1006510/',
-              class: 'link-light', target: '_blank'
-.bg-overlay
+= render 'shared/background_image'
 %hgroup.content-center.landing-main
   %h1 Welcome to Galliora!
   %h3 A place where you can share your wonderful pictures with the world

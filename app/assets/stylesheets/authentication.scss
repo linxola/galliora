@@ -1,7 +1,7 @@
 /**************************/
 /* Background blur filter */
 /**************************/
-.bg-blur:after {
+.bg-blur .bg-img:after {
   content: "";
   position: absolute;
   width: 100%;
