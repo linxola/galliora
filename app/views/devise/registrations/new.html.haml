@@ -1,8 +1,12 @@
 - provide :title, 'Join Galliora'
 
-.sing-up-image{ style: "background-image: url(#{image_path('mountains-Andy-Bay-pixabay.jpg')})" }
-.overlay
-.sign-up-form
+.bg-img.bg-blur{ style: "background-image: url(#{image_path('mountains-Andy-Bay-pixabay.jpg')})" }
+  %p.bg-img-author
+    Image by
+    = link_to 'Andy Bay from Pixabay', 'https://pixabay.com/users/andy_bay-1006510/',
+              class: 'link-light', target: '_blank'
+.bg-overlay
+.content-center.sign-up-form
   %h1 Join Galliora
 
   = form_for(resource, as: resource_name, url: registration_path(resource_name),
@@ -45,4 +49,4 @@
     = f.submit 'SIGN UP', class: 'btn btn-light'
 
   %hr
-  = render 'devise/shared/links'
+  .link-light= render 'devise/shared/links'

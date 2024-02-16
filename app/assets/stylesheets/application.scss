@@ -2,13 +2,36 @@
 @import "bootstrap";
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css");
 
-@import "devise";
+@import "authentication";
 @import "landing";
 
-/******************************/
-/* Background image's overlay */
-/******************************/
-.overlay {
+/********************/
+/* Background image */
+/********************/
+.bg-img {
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/*****************************/
+/* Background image's author */
+/*****************************/
+.bg-img-author {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  color: white;
+  text-align: center;
+}
+
+/**********************/
+/* Background overlay */
+/**********************/
+.bg-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -18,10 +41,47 @@
   opacity: 0.5;
 }
 
+/*****************************************/
+/* Center elements with background image */
+/*****************************************/
+.content-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+}
+
+/**********************/
+/* White & gray links */
+/**********************/
+.link-light a {
+  color: white;
+  transition: color .3s;
+}
+
+.link-light a:hover {
+  color: gray;
+}
+
 /***********/
 /* Tooltip */
 /***********/
 .tooltip-inner {
   background-color: white;
   color: black;
+}
+
+/****************************/
+/* Small screens adaptation */
+/****************************/
+@media (max-width: 640px) {
+  .bg-img-author {
+    font-size: small;
+  }
+
+  .link-light {
+    font-size: small;
+  }
 }
