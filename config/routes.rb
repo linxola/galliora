@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, path: '', skip: :confirmations,
+                     controllers: { registrations: 'users/registrations',
+                                    confirmations: 'users/confirmations' }
+
+  devise_scope :user do
+    get 'check_email', to: 'users/confirmations#new', as: :new_user_confirmation
+    get 'email_confirmation', to: 'users/confirmations#show', as: :user_confirmation
+    post 'email_confirmation', to: 'users/confirmations#create', as: :send_user_confirmation
+  end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

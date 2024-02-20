@@ -1,6 +1,6 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css");
 
 @import "authentication";
 @import "landing";
@@ -56,13 +56,13 @@
 /**********************/
 /* White & gray links */
 /**********************/
-.link-light a {
+.link-light {
   color: white;
   transition: color .3s;
 }
 
-.link-light a:hover {
-  color: gray;
+.link-light:hover {
+  color: gray !important;
 }
 
 /***********/
@@ -78,10 +78,6 @@
 /****************************/
 @media (max-width: 640px) {
   .bg-img-author {
-    font-size: small;
-  }
-
-  .link-light {
     font-size: small;
   }
 }

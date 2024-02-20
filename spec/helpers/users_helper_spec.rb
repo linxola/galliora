@@ -13,22 +13,21 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe UsersHelper do
-  describe '#confirmations_email_field_value' do
-    context 'when user has unconfirmed email' do
-      let(:user) { create(:user, unconfirmed_email: 'confirm_me@email.com') }
+  describe '#confirmation_email' do
+    context 'with unconfirmed email saved in the cookie' do
+      before do
+        cookies.encrypted[:unconfirmed_email] = { value: 'test@email.com',
+                                                  expires: 1.hour.from_now }
+      end
 
       it 'returns unconfirmed email' do
-        expect(helper.confirmations_email_field_value(user))
-          .to eq(user.unconfirmed_email)
+        expect(helper.confirmation_email).to eq('test@email.com')
       end
     end
 
-    context 'when user has only confirmed email' do
-      let(:user) { create(:user, email: 'hello@email.com') }
-
-      it 'returns unconfirmed email' do
-        expect(helper.confirmations_email_field_value(user))
-          .to eq(user.email)
+    context 'without unconfirmed email cookie' do
+      it 'returns expired word' do
+        expect(helper.confirmation_email).to eq(I18n.t('user.helpers.confirmation_email_nil'))
       end
     end
   end
