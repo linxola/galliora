@@ -41,6 +41,7 @@ en:
               too_short: "Password must be minimum 8 characters long"
               too_long: "Password can be maximum 128 characters long"
             username:
+              taken: "This username has already been taken"
               too_short: "Username must be minimum 2 characters long"
               too_long: "Username can be maximum 32 characters long"
               invalid: "Username can contain only letters, numbers, underscores, hyphens(not leading) and periods"
@@ -48,3 +49,7 @@ en:
     tooltips:
       password: "Password must be minimum 8 characters long"
       username: "Username must be 2-32 long and can contain only letters, numbers, underscores, hyphens(not leading) and periods"
+    flashes:
+      confirmation_email_resent: "Confirmation email was resent"
+    helpers:
+      confirmation_email_nil: "expired"

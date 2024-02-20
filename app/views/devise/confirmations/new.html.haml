@@ -1,16 +1,30 @@
-%h2 Resend confirmation instructions
+- provide :title, 'Check your email inbox'
 
-= form_for(resource, as: resource_name, html: { method: :post },
-                     url: confirmation_path(resource_name)) do |f|
-  = render 'devise/shared/error_messages', resource:
+.bg-blur= render 'shared/background_image'
 
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: 'email',
-                            value: confirmations_email_field_value(resource)
+%hgroup.content-center.check-email-content
+  %h1.bi.bi-envelope-heart
+  %h2 You're almost there!
+  %p
+    A message with a confirmation link has been sent to <b>#{confirmation_email}</b>.
+    Please follow the link to activate your account.
 
-  .actions
-    = f.submit 'Resend confirmation instructions'
+  = form_for(resource, as: resource_name, html: { method: :post },
+                       url: confirmation_path(resource_name)) do |f|
+    = f.hidden_field :email, value: cookies.encrypted[:unconfirmed_email]
 
-= render 'devise/shared/links'
+    - if resource.errors.include?(:email)
+      .errors-feedback
+        %i.bi.bi-exclamation-circle
+        Oh snap! This page has expired!
+        %br
+        Please
+        = link_to 'log in', new_session_path(resource_name), class: 'link-light'
+        to proceed.
+
+    - if flash[:notice]
+      .feedback
+        %i.bi.bi-check-circle
+        = flash[:notice]
+
+    = f.submit 'Resend confirmation email', class: 'btn btn-light'
