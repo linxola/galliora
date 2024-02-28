@@ -1,22 +1,42 @@
-%h2 Log in
+- provide :title, 'Log in'
 
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: 'email'
+.bg-blur= render 'shared/background_image'
+.content-center.auth-form
+  %h1 Log in to Galliora
 
-  .field
-    = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: 'current-password'
+  - if flash[:alert]
+    .error-feedback
+      %i.bi.bi-exclamation-circle
+      = flash[:alert]
 
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me
-      = f.label :remember_me
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    .form-floating
+      = f.text_field :login, autofocus: true, autocomplete: 'login', class: 'form-control',
+                             placeholder: 'Login'
+      = f.label :login
 
-  .actions
-    = f.submit 'Log in'
+    .form-floating#password_form
+      = f.password_field :password, autocomplete: 'current-password', class: 'form-control',
+                                    placeholder: 'Password'
+      = f.label :password
+      %span.password-toggle
+        %i.bi.bi-eye{ 'data-controller': 'registration',
+                      'data-registration-target': 'visibilityIcon',
+                      'data-action': 'click->registration#switchPasswordVisibility' }
 
-= render 'devise/shared/links'
+    .row.mt-2.my-sm-2
+      .col.text-nowrap.text-start
+        - if devise_mapping.rememberable?
+          .form-check
+            = f.check_box :remember_me, class: 'form-check-input'
+            = f.label :remember_me, class: 'form-check-label'
+      .col.text-end.text-nowrap.d-none.d-sm-block
+        = link_to 'Forgot password?', new_password_path(resource_name), class: 'link-light'
+
+    = f.submit 'SIGN IN', class: 'btn btn-light'
+
+    .d-block.d-sm-none
+      = link_to 'Forgot password?', new_password_path(resource_name), class: 'link-light'
+
+  %hr
+  = render 'devise/shared/links'

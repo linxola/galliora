@@ -14,7 +14,7 @@
     = f.hidden_field :email, value: cookies.encrypted[:unconfirmed_email]
 
     - if resource.errors.include?(:email)
-      .errors-feedback
+      .error-feedback
         %i.bi.bi-exclamation-circle
         Oh snap! This page has expired!
         %br
@@ -23,7 +23,7 @@
         to proceed.
 
     - if flash[:notice]
-      .feedback
+      .success-feedback
         %i.bi.bi-check-circle
         = flash[:notice]
 
