@@ -51,5 +51,6 @@ en:
       username: "Username must be 2-32 long and can contain only letters, numbers, underscores, hyphens(not leading) and periods"
     flashes:
       confirmation_email_resent: "Confirmation email was resent"
+      confirmation_needed_before_login: "You have to confirm your email address before you can log in"
     helpers:
       confirmation_email_nil: "expired"
