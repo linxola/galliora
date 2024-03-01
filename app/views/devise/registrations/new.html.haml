@@ -1,6 +1,7 @@
 - provide :title, 'Join Galliora'
 
 .bg-blur= render 'shared/background_image'
+
 .content-center.auth-form
   %h1 Join Galliora
 
@@ -44,4 +45,5 @@
     = f.submit 'SIGN UP', class: 'btn btn-light'
 
   %hr
-  = render 'devise/shared/links'
+  Already have an account?
+  = link_to 'Log in', new_session_path(resource_name), class: 'link-light'

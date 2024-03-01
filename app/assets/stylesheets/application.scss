@@ -22,10 +22,11 @@
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 0);
   z-index: 1;
   color: white;
   text-align: center;
+  word-wrap: break-word;
 }
 
 /**********************/
@@ -59,6 +60,7 @@
 .link-light {
   color: white;
   transition: color .3s;
+  white-space: nowrap;
 }
 
 .link-light:hover {
@@ -78,6 +80,11 @@
 /****************************/
 @media (max-width: 576px) {
   .bg-img-author {
-    font-size: small;
+    font-size: smaller;
+    max-width: 75%;
+  }
+
+  .content-center {
+    width: 75%;
   }
 }
