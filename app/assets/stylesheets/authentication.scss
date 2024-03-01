@@ -194,6 +194,8 @@
   }
 
   .check-email-content {
-    width: 75%;
+    background-color: transparent;
+    backdrop-filter: none;
+    width: 100% !important;
   }
 }
