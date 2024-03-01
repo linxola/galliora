@@ -24,7 +24,6 @@ Layout/LineLength:
 
 Metrics/BlockLength:
   Description: 'Checks if the length of a block exceeds some maximum value.'
-  StyleGuide: 'https://docs.rubocop.org/rubocop/cops_metrics.html#metricsblocklength'
   Max: 25
   Exclude:
     - spec/**/*
@@ -38,7 +37,6 @@ Rails/LinkToBlank:
 
 Rails/OutputSafety:
   Description: 'This cop checks for the use of output safety calls like html_safe and raw.'
-  StyleGuide: 'https://www.rubydoc.info/gems/rubocop/0.41.2/RuboCop/Cop/Rails/OutputSafety'
   Exclude:
     - config/initializers/*
 
