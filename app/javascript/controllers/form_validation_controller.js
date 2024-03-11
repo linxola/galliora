@@ -1,22 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ['visibilityIcon']
-
-  switchPasswordVisibility() {
-    const passwordField = document.querySelector('#password_form > input');
-
-    if (passwordField.type === "password") {
-      passwordField.type = "text";
-      this.visibilityIconTarget.classList.remove('bi-eye');
-      this.visibilityIconTarget.classList.add('bi-eye-slash');
-    } else {
-      passwordField.type = "password";
-      this.visibilityIconTarget.classList.remove('bi-eye-slash');
-      this.visibilityIconTarget.classList.add('bi-eye');
-    }
-  }
-
   validateUsername() {
     const usernameField = document.querySelector('#username_form > input');
     const errorsDiv = document.querySelector('#username_form + .invalid-feedback');
@@ -75,7 +59,7 @@ export default class extends Controller {
     return isValid;
   }
 
-  submitForm(event) {
+  submitRegistrationForm(event) {
     const validations = [this.validateUsername(), this.validateEmail(), this.validatePassword()];
 
     validations.forEach(validation => {
