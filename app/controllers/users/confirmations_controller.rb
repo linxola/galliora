@@ -21,7 +21,7 @@ module Users
 
     # The path used after resending confirmation instructions.
     def after_resending_confirmation_instructions_path_for(_resource_name)
-      flash.notice = I18n.t('user.flashes.confirmation_email_resent')
+      flash.notice = I18n.t('devise.confirmations.resend_instructions')
       new_user_confirmation_path
     end
 

@@ -16,7 +16,7 @@ RSpec.describe 'Confirmations' do
       before { post_send_email }
 
       it 'creates a flash message' do
-        expect(flash[:notice]).to eq(I18n.t('user.flashes.confirmation_email_resent'))
+        expect(flash[:notice]).to eq(I18n.t('devise.confirmations.resend_instructions'))
       end
 
       it 'redirects back to the same screen' do
