@@ -6,23 +6,23 @@
   %h1 Join Galliora
 
   = form_for(resource, as: resource_name, url: registration_path(resource_name),
-                       data: { controller: 'registration',
-                               action: 'registration#submitForm' }) do |f|
+                       data: { controller: 'form-validation',
+                               action: 'form-validation#submitRegistrationForm' }) do |f|
     .form-floating#username_form
       = f.text_field :username, autofocus: true, autocomplete: 'username', class: 'form-control',
                                 placeholder: 'Username',
                                 data: { 'bs-toggle': 'tooltip',
                                         'bs-placement': 'right',
                                         'bs-title': I18n.t('user.tooltips.username'),
-                                        controller: 'registration',
-                                        action: 'blur->registration#validateUsername' }
+                                        controller: 'form-validation',
+                                        action: 'blur->form-validation#validateUsername' }
       = f.label :username
     = render 'devise/shared/error_messages', resource:, field: :username
 
     .form-floating#email_form
       = f.text_field :email, autocomplete: 'email', class: 'form-control', placeholder: 'Email',
-                             data: { controller: 'registration',
-                                     action: 'blur->registration#validateEmail' }
+                             data: { controller: 'form-validation',
+                                     action: 'blur->form-validation#validateEmail' }
       = f.label :email
     = render 'devise/shared/error_messages', resource:, field: :email
 
@@ -33,13 +33,13 @@
                                       data: { 'bs-toggle': 'tooltip',
                                               'bs-placement': 'right',
                                               'bs-title': I18n.t('user.tooltips.password'),
-                                              controller: 'registration',
-                                              action: 'blur->registration#validatePassword' }
+                                              controller: 'form-validation',
+                                              action: 'blur->form-validation#validatePassword' }
         = f.label :password
         %span.password-toggle
-          %i.bi.bi-eye{ 'data-controller': 'registration',
-                        'data-registration-target': 'visibilityIcon',
-                        'data-action': 'click->registration#switchPasswordVisibility' }
+          %i.bi.bi-eye{ 'data-controller': 'password',
+                        'data-password-target': 'visibilityIcon',
+                        'data-action': 'click->password#switchVisibility' }
       = render 'devise/shared/error_messages', resource:, field: :password
 
     = f.submit 'SIGN UP', class: 'btn btn-light'

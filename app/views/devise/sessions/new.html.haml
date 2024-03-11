@@ -21,9 +21,9 @@
                                     placeholder: 'Password'
       = f.label :password
       %span.password-toggle
-        %i.bi.bi-eye{ 'data-controller': 'registration',
-                      'data-registration-target': 'visibilityIcon',
-                      'data-action': 'click->registration#switchPasswordVisibility' }
+        %i.bi.bi-eye{ 'data-controller': 'password',
+                      'data-password-target': 'visibilityIcon',
+                      'data-action': 'click->password#switchVisibility' }
 
     .row.mt-2.my-sm-2
       .col.text-nowrap.text-start

@@ -12,8 +12,8 @@
 
   = form_for(resource, as: resource_name, html: { method: :post },
                        url: password_path(resource_name),
-                       data: { controller: 'registration',
-                               action: 'registration#submitPasswordForm' }) do |f|
+                       data: { controller: 'form-validation',
+                               action: 'form-validation#submitPasswordForm' }) do |f|
     .form-floating#email_form
       = f.text_field :email, autofocus: true, autocomplete: 'email', class: 'form-control',
                              placeholder: 'Email'
