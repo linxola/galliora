@@ -83,6 +83,10 @@ export default class extends Controller {
     })
   }
 
+  submitPasswordForm(event) {
+    if (!this.validateEmail()) { event.preventDefault(); }
+  }
+
   #displayErrors(target, errorsDiv, errorText) {
     target.classList.add('is-invalid');
     errorsDiv.innerHTML += `<i class="bi bi-exclamation-circle"></i> ${errorText} <br>`;

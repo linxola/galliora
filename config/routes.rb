@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   devise_for :users, path: '', skip: :confirmations,
                      controllers: { registrations: 'users/registrations',
                                     confirmations: 'users/confirmations',
-                                    sessions: 'users/sessions' }
+                                    sessions: 'users/sessions',
+                                    passwords: 'users/passwords' }
 
   devise_scope :user do
     get 'check_email', to: 'users/confirmations#new', as: :new_user_confirmation
