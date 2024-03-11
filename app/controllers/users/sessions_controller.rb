@@ -28,12 +28,12 @@ module Users
 
     def check_user_confirmation
       user = User.find_for_database_authentication(login: params[:user][:login])
-      return if user&.confirmed?
+      return if user.nil? || user.confirmed?
 
       cookies.encrypted[:unconfirmed_email] = { value: user.email, expires: 1.hour.from_now }
       user.send_confirmation_instructions
       redirect_to new_user_confirmation_path,
-                  alert: I18n.t('user.flashes.confirmation_needed_before_login')
+                  alert: I18n.t('devise.failure.inactive')
     end
   end
 end

@@ -15,13 +15,13 @@ RSpec.describe 'Sessions' do
     context 'when username as login' do
       let(:login_params) { { login: 'test', password: 'TestPassword' } }
 
+      before { post_log_in }
+
       it 'redirects to root path' do
-        post_log_in
         expect(response).to redirect_to(root_path)
       end
 
       it 'returns http see_other status' do
-        post_log_in
         expect(response).to have_http_status(:see_other)
       end
     end
@@ -29,13 +29,13 @@ RSpec.describe 'Sessions' do
     context 'when email as login' do
       let(:login_params) { { login: 'sms@test.io', password: 'TestPassword' } }
 
+      before { post_log_in }
+
       it 'redirects to root path' do
-        post_log_in
         expect(response).to redirect_to(root_path)
       end
 
       it 'returns http see_other status' do
-        post_log_in
         expect(response).to have_http_status(:see_other)
       end
     end
@@ -55,12 +55,35 @@ RSpec.describe 'Sessions' do
 
       it 'creates alert flash message' do
         post_log_in
-        expect(flash[:alert]).to eq(I18n.t('user.flashes.confirmation_needed_before_login'))
+        expect(flash[:alert]).to eq(I18n.t('devise.failure.inactive'))
       end
 
       it 'redirects to the email confirmation page' do
         post_log_in
         expect(response).to redirect_to(new_user_confirmation_path)
+      end
+
+      it 'returns http found status' do
+        post_log_in
+        expect(response).to have_http_status(:found)
+      end
+    end
+
+    context 'when invalid login/password' do
+      let(:login_params) { { login: '', password: '' } }
+
+      before { post_log_in }
+
+      it 'creates alert flash message' do
+        expect(flash[:alert]).to eq(I18n.t('devise.failure.invalid'))
+      end
+
+      it 'does not redirect to root path' do
+        expect(response).not_to redirect_to(root_path)
+      end
+
+      it 'returns http unprocessable_entity status' do
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
