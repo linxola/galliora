@@ -18,6 +18,6 @@
       = f.text_field :email, autofocus: true, autocomplete: 'email', class: 'form-control',
                              placeholder: 'Email'
       = f.label :email
-    = render 'devise/shared/error_messages', resource:, field: :email
+    = render 'shared/error_messages', resource:, field: :email
 
     = f.submit 'Send me reset password instructions', class: 'btn btn-light'

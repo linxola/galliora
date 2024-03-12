@@ -20,14 +20,12 @@
         %br
         Please
         = link_to 'log in', new_session_path(resource_name), class: 'link-light'
-        to proceed.
-
-    - if flash[:alert]
+        to proceed
+    - elsif flash[:alert]
       .error-feedback
         %i.bi.bi-exclamation-circle
         = flash[:alert]
-
-    - if flash[:notice]
+    - elsif flash[:notice]
       .success-feedback
         %i.bi.bi-check-circle
         = flash[:notice]
