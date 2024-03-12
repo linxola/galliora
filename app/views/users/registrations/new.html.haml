@@ -17,14 +17,14 @@
                                         controller: 'form-validation',
                                         action: 'blur->form-validation#validateUsername' }
       = f.label :username
-    = render 'devise/shared/error_messages', resource:, field: :username
+    = render 'shared/error_messages', resource:, field: :username
 
     .form-floating#email_form
       = f.text_field :email, autocomplete: 'email', class: 'form-control', placeholder: 'Email',
                              data: { controller: 'form-validation',
                                      action: 'blur->form-validation#validateEmail' }
       = f.label :email
-    = render 'devise/shared/error_messages', resource:, field: :email
+    = render 'shared/error_messages', resource:, field: :email
 
     .input-group.has-validation
       .form-floating#password_form
@@ -40,10 +40,16 @@
           %i.bi.bi-eye{ 'data-controller': 'password',
                         'data-password-target': 'visibilityIcon',
                         'data-action': 'click->password#switchVisibility' }
-      = render 'devise/shared/error_messages', resource:, field: :password
+      = render 'shared/error_messages', resource:, field: :password
 
     = f.submit 'SIGN UP', class: 'btn btn-light'
 
   %hr
   Already have an account?
   = link_to 'Log in', new_session_path(resource_name), class: 'link-light'
+
+  - if devise_mapping.omniauthable?
+    %br/
+    - resource_class.omniauth_providers.each do |provider|
+      = button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}",
+                  omniauth_authorize_path(resource_name, provider), data: { turbo: false }
