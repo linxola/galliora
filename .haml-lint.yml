@@ -7,3 +7,4 @@ linters:
 
   LineLength:
     max: 100
+    exclude: 'app/views/**/mailer/*.text.haml'
