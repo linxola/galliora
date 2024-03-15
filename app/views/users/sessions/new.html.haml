@@ -5,10 +5,7 @@
 .content-center.auth-form
   %h1 Log in to Galliora
 
-  - if flash[:alert]
-    .error-feedback
-      %i.bi.bi-exclamation-circle
-      = flash[:alert]
+  = render 'shared/flashes'
 
   = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
     .form-floating
