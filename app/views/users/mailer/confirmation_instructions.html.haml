@@ -1,5 +1,16 @@
-%p Welcome #{@email}!
+= render 'users/mailer/shared/css'
 
-%p You can confirm your account email through the link below:
+.container
+  .content
+    %h1 Welcome to Galliora 🎉
 
-%p= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token)
+    .frame
+      %h3 We are glad to have you on board, #{@resource.username}!
+
+      %p
+        But before you can explore Galliora, you need to confirm your email address:
+
+      %p.btn-black
+        = link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token)
+
+    %p Galliora team
