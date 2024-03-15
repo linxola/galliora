@@ -15,6 +15,7 @@ software installed:
 2. Node.js 20.10.0
 3. PostgreSQL 16
 4. ImageMagick
+5. MailHog (optional)
 
 --------
 
@@ -189,6 +190,12 @@ bin/rake db:create
 bin/rake db:migrate
 bin/rake db:seed
 ```
+
+#### Step 11 (optional)
+
+MailHog is used only in development and only to test email sending. So, if you need it, please follow its [official documentation on installation](https://github.com/mailhog/MailHog?tab=readme-ov-file#installation).
+
+After you install and run MailHog, it can be found by this address: http://0.0.0.0:8025
 
 **Congratulations, you have set up the project!**
 
