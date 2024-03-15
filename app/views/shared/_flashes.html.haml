@@ -1,0 +1,8 @@
+- if flash[:alert]
+  .error-feedback
+    %i.bi.bi-exclamation-circle
+    = flash[:alert]
+- elsif flash[:notice]
+  .success-feedback
+    %i.bi.bi-check-circle
+    = flash[:notice]

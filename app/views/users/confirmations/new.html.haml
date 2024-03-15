@@ -13,21 +13,12 @@
                        url: confirmation_path(resource_name)) do |f|
     = f.hidden_field :email, value: cookies.encrypted[:unconfirmed_email]
 
-    - if resource.errors.include?(:email)
-      .error-feedback
-        %i.bi.bi-exclamation-circle
-        Oh snap! This page has expired!
-        %br
-        Please
-        = link_to 'log in', new_session_path(resource_name), class: 'link-light'
-        to proceed
-    - elsif flash[:alert]
-      .error-feedback
-        %i.bi.bi-exclamation-circle
-        = flash[:alert]
-    - elsif flash[:notice]
-      .success-feedback
-        %i.bi.bi-check-circle
-        = flash[:notice]
+    = render 'shared/flashes'
 
-    = f.submit 'Resend confirmation email', class: 'btn btn-light'
+    - if cookies.encrypted[:unconfirmed_email].present?
+      = f.submit 'Resend confirmation email', class: 'btn btn-light'
+    - else
+      %b.error-feedback
+        This form is expired, please
+        = link_to 'log in', new_session_path(resource_name), class: 'link-light'
+        to proceed.
