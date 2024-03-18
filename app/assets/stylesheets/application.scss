@@ -75,6 +75,25 @@
   color: black;
 }
 
+/*****************************************/
+/* White button with transition to black */
+/*****************************************/
+.btn-light {
+  width: 100%;
+  margin: 0.5rem auto;
+  border: none;
+  padding: 10px;
+  text-align: center;
+  transition: background-color .3s, color .3s, box-shadow .3s;
+  white-space: normal;
+}
+
+.btn-light:hover {
+  background-color: black;
+  color: white;
+  box-shadow: rgba(255, 255, 255, 0.6) 0 0 8px;
+}
+
 /****************************/
 /* Small screens adaptation */
 /****************************/

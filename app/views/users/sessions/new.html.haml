@@ -4,6 +4,9 @@
 
 .content-center.auth-form
   %h1 Log in to Galliora
+  .subtitle-link
+    Don't have an account?
+    = link_to 'Sign up', new_registration_path(resource_name), class: 'link-light'
 
   = render 'shared/flashes'
 
@@ -36,12 +39,4 @@
     .d-block.d-sm-none
       = link_to 'Forgot password?', new_password_path(resource_name), class: 'link-light'
 
-  %hr
-  Don't have an account?
-  = link_to 'Sign up', new_registration_path(resource_name), class: 'link-light'
-
-  - if devise_mapping.omniauthable?
-    %br/
-    - resource_class.omniauth_providers.each do |provider|
-      = button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}",
-                  omniauth_authorize_path(resource_name, provider), data: { turbo: false }
+  = render 'users/shared/omniauth_buttons'

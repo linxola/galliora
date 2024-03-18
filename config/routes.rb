@@ -3,7 +3,8 @@ Rails.application.routes.draw do
                      controllers: { registrations: 'users/registrations',
                                     confirmations: 'users/confirmations',
                                     sessions: 'users/sessions',
-                                    passwords: 'users/passwords' }
+                                    passwords: 'users/passwords',
+                                    omniauth_callbacks: 'users/omniauth_callbacks' }
 
   devise_scope :user do
     get 'check_email', to: 'users/confirmations#new', as: :new_user_confirmation

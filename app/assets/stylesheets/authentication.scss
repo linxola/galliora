@@ -17,6 +17,10 @@
 }
 
 .auth-form h1 {
+  margin-bottom: 0;
+}
+
+.auth-form .subtitle-link {
   margin-bottom: 1rem;
 }
 
@@ -109,31 +113,6 @@
 
 .auth-form .form-check-input:hover {
   box-shadow: rgba(255, 255, 255, 0.6) 0 0 8px;
-}
-
-/* Submit button */
-.auth-form .btn-light,
-.check-email-content .btn-light {
-  width: 100%;
-  margin: 0.5rem auto;
-  border: none;
-  padding: 10px;
-  text-align: center;
-  transition: background-color .3s, color .3s, box-shadow .3s;
-  white-space: normal;
-}
-
-.auth-form .btn-light:hover,
-.check-email-content .btn-light:hover {
-  background-color: black;
-  color: white;
-  box-shadow: rgba(255, 255, 255, 0.6) 0 0 8px;
-}
-
-/* Horizontal line */
-.auth-form hr {
-  width: 75%;
-  margin: 1rem auto;
 }
 
 /*****************************************/
