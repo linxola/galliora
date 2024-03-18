@@ -13,6 +13,8 @@
 #  current_sign_in_ip     :string
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
+#  github_uid             :string
+#  google_uid             :string
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :string
 #  name                   :string
@@ -34,11 +36,11 @@
 #
 class User < ApplicationRecord
   devise :database_authenticatable, :confirmable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, omniauth_providers: %i[github google_oauth2]
 
   attr_accessor :login
 
-  # TODO: change tests for username validation
   validates :username, length: { in: 2..32 }, uniqueness: { case_sensitive: false },
                        format: { with: /\A\w?\z|\A\w[\w.-]+\z/ } # Assures POSIX.1-2017 compliance
   validates :name, length: { maximum: 64 }
@@ -49,5 +51,44 @@ class User < ApplicationRecord
     login = conditions.delete(:login)
     where(conditions).where(['lower(username) = :value OR lower(email) = :value',
                              { value: login.strip.downcase }]).first
+  end
+
+  def self.from_omniauth(auth)
+    user = where('github_uid = :uid OR google_uid = :uid OR email = :email', uid: auth.uid,
+                                                                             email: auth.info.email)
+           .first
+    user ||= create_user_from_oauth(auth.info)
+
+    set_oauth_uid(user, auth.provider, auth.uid) if user.persisted?
+    user
+  end
+
+  def self.create_user_from_oauth(params)
+    create do |user|
+      user.username = create_username_from_oauth(params.nickname, params.email)
+      user.email = params.email
+      user.password = Devise.friendly_token[0, 20]
+      user.name = params.name
+      # user.image = params.image
+      user.skip_confirmation!
+    end
+  end
+
+  def self.create_username_from_oauth(username, email)
+    return username if username && where(username:).blank?
+
+    emailname = email.split('@').first
+    return emailname if where(username: emailname).blank?
+
+    emailname + Random.new.rand(100..100_000).to_s
+  end
+
+  def self.set_oauth_uid(user, provider, uid)
+    case provider
+    when 'github'
+      user.update(github_uid: uid) if user.github_uid.nil?
+    when 'google_oauth2'
+      user.update(google_uid: uid) if user.google_uid.nil?
+    end
   end
 end

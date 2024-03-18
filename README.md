@@ -179,6 +179,11 @@ export DB_USERNAME=<value>
 export DB_PASSWORD=<value>
 export DB_PRODUCTION_USERNAME=<value>
 export DB_PRODUCTION_PASSWORD=<value>
+export DOMAIN=<value>
+export GITHUB_CLIENT_ID=<value>
+export GITHUB_CLIENT_SECRET=<value>
+export GOOGLE_CLIENT_ID=<value>
+export GOOGLE_CLIENT_SECRET=<value>
 ```
 
 #### Step 10
@@ -192,6 +197,14 @@ bin/rake db:seed
 ```
 
 #### Step 11 (optional)
+
+If you are going to use OmniAuth, you need to get such ENV variables: GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET.
+
+You can find how to do it in here:
+- [OmniAuth GitHub](https://github.com/omniauth/omniauth-github?tab=readme-ov-file#omniauth-github)
+- [OmniAuth Google](https://github.com/zquestz/omniauth-google-oauth2?tab=readme-ov-file#google-api-setup)
+
+#### Step 12 (optional)
 
 MailHog is used only in development and only to test email sending. So, if you need it, please follow its [official documentation on installation](https://github.com/mailhog/MailHog?tab=readme-ov-file#installation).
 

@@ -40,6 +40,10 @@ Rails/OutputSafety:
   Exclude:
     - config/initializers/*
 
+RSpec/NestedGroups:
+  Description: 'Checks for nested example groups.'
+  Max: 5
+
 Style/Documentation:
   Description: 'Checks for missing top-level documentation of classes and modules.'
   Enabled: false
