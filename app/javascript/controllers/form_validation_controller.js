@@ -8,7 +8,7 @@ export default class extends Controller {
 
     this.#cleanErrors(usernameField, errorsDiv);
 
-    if (usernameField.value.length < 2) {
+    if (usernameField.value && usernameField.value.length < 2) {
       this.#displayErrors(usernameField, errorsDiv, I18n.username.too_short);
       isValid = false;
     } else if (usernameField.value.length > 32) {
@@ -30,10 +30,7 @@ export default class extends Controller {
 
     this.#cleanErrors(emailField, errorsDiv)
 
-    if (emailField.value.length === 0) {
-      this.#displayErrors(emailField, errorsDiv, I18n.email.blank);
-      isValid = false;
-    } else if (!/^[^@\s]+@[^@\s]+$/.test(emailField.value)) {
+    if (emailField.value && !/^[^@\s]+@[^@\s]+$/.test(emailField.value)) {
       this.#displayErrors(emailField, errorsDiv, I18n.email.invalid);
       isValid = false;
     }
@@ -48,7 +45,7 @@ export default class extends Controller {
 
     this.#cleanErrors(passwordField, errorsDiv)
 
-    if (passwordField.value.length < 8) {
+    if (passwordField.value && passwordField.value.length < 8) {
       this.#displayErrors(passwordField, errorsDiv, I18n.password.too_short);
       isValid = false;
     } else if (passwordField.value.length > 128) {

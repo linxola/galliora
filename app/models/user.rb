@@ -42,7 +42,8 @@ class User < ApplicationRecord
   attr_accessor :login
 
   validates :username, length: { in: 2..32 }, uniqueness: { case_sensitive: false },
-                       format: { with: /\A\w?\z|\A\w[\w.-]+\z/ } # Assures POSIX.1-2017 compliance
+                       format: { with: /\A\w?\z|\A\w[\w.-]+\z/, # Assures POSIX.1-2017 compliance
+                                 message: I18n.t('user.validations.username.invalid') }
   validates :name, length: { maximum: 64 }
   validates :about, length: { maximum: 256 }
 
