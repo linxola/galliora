@@ -20,7 +20,7 @@ module Users
       if resource.errors.empty?
         set_flash_message!(:notice, :confirmed)
       else
-        flash.alert = resource.errors.full_messages.last
+        flash.alert = resource.errors.full_messages.first
       end
 
       respond_with_navigational(resource) do
