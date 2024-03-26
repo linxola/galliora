@@ -184,6 +184,10 @@ export GITHUB_CLIENT_ID=<value>
 export GITHUB_CLIENT_SECRET=<value>
 export GOOGLE_CLIENT_ID=<value>
 export GOOGLE_CLIENT_SECRET=<value>
+export RECAPTCHA_SITE_KEY_V2=<value>
+export RECAPTCHA_SECRET_KEY_V2=<value>
+export RECAPTCHA_SITE_KEY_V3=<value>
+export RECAPTCHA_SECRET_KEY_V3=<value>
 ```
 
 #### Step 10
@@ -196,7 +200,16 @@ bin/rake db:migrate
 bin/rake db:seed
 ```
 
-#### Step 11 (optional)
+#### Step 11
+
+This application uses Google reCAPTCHA, so you need to obtain its keys.
+Go to the [reCAPTCHA admin console](https://www.google.com/recaptcha/admin) and create keys for V2 and V3 captcha types.
+Then, add the keys to your `.env` file.
+
+Note: Enter `localhost` or `127.0.0.1` as the domain if using in development with `localhost:3000`.
+
+
+#### Step 12 (optional)
 
 If you are going to use OmniAuth, you need to get such ENV variables: GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET.
 
@@ -204,7 +217,7 @@ You can find how to do it in here:
 - [OmniAuth GitHub](https://github.com/omniauth/omniauth-github?tab=readme-ov-file#omniauth-github)
 - [OmniAuth Google](https://github.com/zquestz/omniauth-google-oauth2?tab=readme-ov-file#google-api-setup)
 
-#### Step 12 (optional)
+#### Step 13 (optional)
 
 MailHog is used only in development and only to test email sending. So, if you need it, please follow its [official documentation on installation](https://github.com/mailhog/MailHog?tab=readme-ov-file#installation).
 

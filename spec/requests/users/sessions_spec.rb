@@ -86,5 +86,42 @@ RSpec.describe 'Sessions' do
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
+
+    context 'when recaptcha fails' do
+      let(:login_params) { { login: 'test', password: 'TestPassword' } }
+
+      before { Recaptcha.configuration.skip_verify_env.delete('test') }
+      after { Recaptcha.configuration.skip_verify_env.append('test') }
+
+      context 'when only recaptcha v3 fails' do
+        before do
+          # rubocop:disable RSpec/AnyInstance
+          allow_any_instance_of(Users::SessionsController).to receive(:verify_recaptcha)
+            .and_return(true)
+          allow_any_instance_of(Users::SessionsController).to receive(:verify_recaptcha)
+            .with(action: 'login', minimum_score: 0.5,
+                  secret_key: ENV.fetch('RECAPTCHA_SECRET_KEY_V3'))
+            .and_return(false)
+          # rubocop:enable RSpec/AnyInstance
+          post_log_in
+        end
+
+        it 'triggers recaptcha v2 and logs in without errors' do
+          expect(flash[:recaptcha_error]).to be_nil
+        end
+      end
+
+      context 'when v3 and v2 recaptchas fail' do
+        before { post_log_in }
+
+        it 'adds flash error' do
+          expect(flash[:recaptcha_error]).to be_present
+        end
+
+        it 'returns http unprocessable_entity status' do
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
+      end
+    end
   end
 end
