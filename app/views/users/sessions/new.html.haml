@@ -34,6 +34,8 @@
       .col.text-end.text-nowrap.d-none.d-sm-block
         = link_to 'Forgot password?', new_password_path(resource_name), class: 'link-light'
 
+    = render 'shared/recaptcha', action: 'login', show_checkbox_recaptcha: @show_checkbox_recaptcha
+
     = f.submit 'SIGN IN', class: 'btn btn-light'
 
     .d-block.d-sm-none

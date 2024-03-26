@@ -2,7 +2,7 @@
 
 module Users
   class RegistrationsController < Devise::RegistrationsController
-    before_action :configure_sign_up_params, only: [:create]
+    prepend_before_action :check_captcha, :configure_sign_up_params, only: [:create]
     before_action :configure_account_update_params, only: [:update] # rubocop:disable Rails/LexicallyScopedActionFilter
 
     # GET /sign_up
@@ -13,7 +13,7 @@ module Users
     # POST /
     def create
       super
-      cookies.encrypted[:unconfirmed_email] = { value: params[:user][:email],
+      cookies.encrypted[:unconfirmed_email] = { value: resource.email,
                                                 expires: 1.hour.from_now }
       flash.clear
     end
@@ -63,6 +63,22 @@ module Users
     # The path used after sign up for inactive accounts.
     def after_inactive_sign_up_path_for(_resource)
       new_user_confirmation_path
+    end
+
+    private
+
+    def check_captcha
+      success = verify_recaptcha(action: 'registration', minimum_score: 0.75,
+                                 secret_key: ENV.fetch('RECAPTCHA_SECRET_KEY_V3'))
+      unless success
+        checkbox_success = verify_recaptcha(secret_key: ENV.fetch('RECAPTCHA_SECRET_KEY_V2'))
+      end
+      return if success || checkbox_success
+
+      self.resource = resource_class.new sign_up_params
+      resource.validate and set_minimum_password_length
+      @show_checkbox_recaptcha = true
+      render :new, status: :unprocessable_entity
     end
   end
 end

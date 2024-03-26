@@ -45,6 +45,9 @@
                         'data-action': 'click->password#switchVisibility' }
       = render 'shared/error_messages', resource:, field: :password
 
+    = render 'shared/recaptcha', action: 'registration',
+                                 show_checkbox_recaptcha: @show_checkbox_recaptcha
+
     = f.submit 'SIGN UP', class: 'btn btn-light'
 
   = render 'users/shared/omniauth_buttons'

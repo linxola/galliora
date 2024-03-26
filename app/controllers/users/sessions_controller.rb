@@ -2,7 +2,8 @@
 
 module Users
   class SessionsController < Devise::SessionsController
-    before_action :configure_sign_in_params, :check_user_confirmation, only: [:create]
+    prepend_before_action :check_captcha, :configure_sign_in_params, :check_user_confirmation,
+                          only: [:create]
 
     # GET /sign_in
     # def new
@@ -26,6 +27,8 @@ module Users
       devise_parameter_sanitizer.permit(:sign_in, keys: %i[login password])
     end
 
+    private
+
     def check_user_confirmation
       user = User.find_for_database_authentication(login: params[:user][:login])
       return if user.nil? || user.confirmed?
@@ -34,6 +37,19 @@ module Users
       user.send_confirmation_instructions
       redirect_to new_user_confirmation_path,
                   alert: I18n.t('devise.failure.inactive')
+    end
+
+    def check_captcha
+      success = verify_recaptcha(action: 'login', minimum_score: 0.75,
+                                 secret_key: ENV.fetch('RECAPTCHA_SECRET_KEY_V3'))
+      unless success
+        checkbox_success = verify_recaptcha(secret_key: ENV.fetch('RECAPTCHA_SECRET_KEY_V2'))
+      end
+      return if success || checkbox_success
+
+      self.resource = resource_class.new sign_in_params
+      @show_checkbox_recaptcha = true
+      render :new, status: :unprocessable_entity
     end
   end
 end
