@@ -20,12 +20,14 @@ module Users
     #   super
     # end
 
-    protected
+    # protected
 
     # The path used when OmniAuth fails
     # def after_omniauth_failure_path_for(scope)
     #   super(scope)
     # end
+
+    private
 
     def authenticate(provider)
       @user = User.from_omniauth(request.env['omniauth.auth'])
