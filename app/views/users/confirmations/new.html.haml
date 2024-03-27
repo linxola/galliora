@@ -16,7 +16,7 @@
     = render 'shared/flashes'
 
     - if cookies.encrypted[:unconfirmed_email].present?
-      = f.submit 'Resend confirmation email', class: 'btn btn-light'
+      = f.submit 'Resend confirmation email', class: 'btn btn-light w-100'
     - else
       %b.error-feedback
         This form is expired, please

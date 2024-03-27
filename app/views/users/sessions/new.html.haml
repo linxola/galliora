@@ -36,7 +36,7 @@
 
     = render 'shared/recaptcha', action: 'login', show_checkbox_recaptcha: @show_checkbox_recaptcha
 
-    = f.submit 'SIGN IN', class: 'btn btn-light'
+    = f.submit 'SIGN IN', class: 'btn btn-light w-100'
 
     .d-block.d-sm-none
       = link_to 'Forgot password?', new_password_path(resource_name), class: 'link-light'
