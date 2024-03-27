@@ -7,12 +7,12 @@
     %hr
 .row
   .col
-    = button_to omniauth_authorize_path(resource_name, :github), data: { turbo: false },
-                                                                 class: 'btn btn-light' do
+    = button_to omniauth_authorize_path(resource_name, :github),
+                data: { turbo: false }, class: 'btn btn-light w-100' do
       %i.bi.bi-github
       GitHub
   .col
-    = button_to omniauth_authorize_path(resource_name, :google_oauth2), data: { turbo: false },
-                                                                        class: 'btn btn-light' do
+    = button_to omniauth_authorize_path(resource_name, :google_oauth2),
+                data: { turbo: false }, class: 'btn btn-light w-100' do
       %i.bi.bi-google
       Google
