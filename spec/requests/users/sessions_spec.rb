@@ -17,8 +17,8 @@ RSpec.describe 'Sessions' do
 
       before { post_log_in }
 
-      it 'redirects to root path' do
-        expect(response).to redirect_to(root_path)
+      it 'redirects to the user profile page' do
+        expect(response).to redirect_to(user_path(user.id))
       end
 
       it 'returns http see_other status' do
@@ -31,8 +31,8 @@ RSpec.describe 'Sessions' do
 
       before { post_log_in }
 
-      it 'redirects to root path' do
-        expect(response).to redirect_to(root_path)
+      it 'redirects to the user profile page' do
+        expect(response).to redirect_to(user_path(user.id))
       end
 
       it 'returns http see_other status' do
@@ -122,6 +122,27 @@ RSpec.describe 'Sessions' do
           expect(response).to have_http_status(:unprocessable_entity)
         end
       end
+    end
+  end
+
+  describe 'DELETE /sign_out' do
+    subject(:delete_log_out) do
+      delete '/sign_out'
+    end
+
+    let(:user) { create(:user, email: 'sms@test.io', username: 'test', password: 'TestPassword') }
+
+    before do
+      sign_in(user)
+      delete_log_out
+    end
+
+    it 'redirects to login page' do
+      expect(response).to redirect_to(new_user_session_path)
+    end
+
+    it 'returns http see_other status' do
+      expect(response).to have_http_status(:see_other)
     end
   end
 end

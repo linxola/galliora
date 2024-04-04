@@ -38,9 +38,9 @@ RSpec.describe 'OmniauthCallbacks' do
         expect(flash[:notice]).to eq(I18n.t('devise.omniauth_callbacks.success', kind: 'GitHub'))
       end
 
-      it 'redirects to the root page' do
+      it 'redirects to the user profile page' do
         omniauth_callback
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(user_path(user.id))
       end
 
       it 'returns http found status' do
@@ -68,9 +68,9 @@ RSpec.describe 'OmniauthCallbacks' do
         expect(flash[:notice]).to eq(I18n.t('devise.omniauth_callbacks.success', kind: 'GitHub'))
       end
 
-      it 'redirects to the root page' do
+      it 'redirects to the user profile page' do
         omniauth_callback
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(user_path(user.id))
       end
 
       it 'returns http found status' do
@@ -113,9 +113,9 @@ RSpec.describe 'OmniauthCallbacks' do
         expect(flash[:notice]).to eq(I18n.t('devise.omniauth_callbacks.success', kind: 'GitHub'))
       end
 
-      it 'redirects to the root page' do
+      it 'redirects to the user profile page' do
         omniauth_callback
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(user_path(User.last.id))
       end
 
       it 'returns http found status' do
@@ -195,9 +195,9 @@ RSpec.describe 'OmniauthCallbacks' do
         expect(flash[:notice]).to eq(I18n.t('devise.omniauth_callbacks.success', kind: 'Google'))
       end
 
-      it 'redirects to the root page' do
+      it 'redirects to the user profile page' do
         omniauth_callback
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(user_path(user.id))
       end
 
       it 'returns http found status' do
@@ -225,9 +225,9 @@ RSpec.describe 'OmniauthCallbacks' do
         expect(flash[:notice]).to eq(I18n.t('devise.omniauth_callbacks.success', kind: 'Google'))
       end
 
-      it 'redirects to the root page' do
+      it 'redirects to the user profile page' do
         omniauth_callback
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(user_path(user.id))
       end
 
       it 'returns http found status' do
@@ -270,9 +270,9 @@ RSpec.describe 'OmniauthCallbacks' do
         expect(flash[:notice]).to eq(I18n.t('devise.omniauth_callbacks.success', kind: 'Google'))
       end
 
-      it 'redirects to the root page' do
+      it 'redirects to the user profile page' do
         omniauth_callback
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(user_path(User.last.id))
       end
 
       it 'returns http found status' do

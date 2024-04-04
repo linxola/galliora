@@ -2,8 +2,8 @@
 
 module Users
   class SessionsController < Devise::SessionsController
-    prepend_before_action :check_captcha, :configure_sign_in_params, :check_user_confirmation,
-                          only: [:create]
+    prepend_before_action :check_captcha, :configure_sign_in_params, only: [:create]
+    before_action :check_user_confirmation, only: [:create]
 
     # GET /sign_in
     # def new
@@ -25,6 +25,14 @@ module Users
     # If you have extra params to permit, append them to the sanitizer.
     def configure_sign_in_params
       devise_parameter_sanitizer.permit(:sign_in, keys: %i[login password])
+    end
+
+    def after_sign_in_path_for(resource)
+      stored_location_for(resource) || user_path(current_user.id)
+    end
+
+    def after_sign_out_path_for(_resource)
+      new_user_session_path
     end
 
     private
