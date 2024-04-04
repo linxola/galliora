@@ -35,6 +35,9 @@
 #  index_users_on_username              (username) UNIQUE
 #
 class User < ApplicationRecord
+  extend FriendlyId
+  friendly_id :username
+
   devise :database_authenticatable, :confirmable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: %i[github google_oauth2]
@@ -42,7 +45,8 @@ class User < ApplicationRecord
   attr_accessor :login
 
   validates :username, length: { in: 2..32 }, uniqueness: { case_sensitive: false },
-                       format: { with: /\A\w?\z|\A\w[\w.-]+\z/, # Assures POSIX.1-2017 compliance
+                       exclusion: { in: friendly_id_config.reserved_words },
+                       format: { with: /\A\w\z|\A\w[\w-]+\z/,
                                  message: I18n.t('user.validations.username.invalid') }
   validates :name, length: { maximum: 64 }
   validates :about, length: { maximum: 256 }
@@ -78,7 +82,7 @@ class User < ApplicationRecord
   def self.create_username_from_oauth(username, email)
     return username if username && where(username:).blank?
 
-    emailname = email.split('@').first
+    emailname = email.split('@').first.gsub(/[.]/, '_')
     return emailname if where(username: emailname).blank?
 
     emailname + Random.new.rand(100..100_000).to_s

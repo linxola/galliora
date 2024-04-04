@@ -29,6 +29,11 @@ Metrics/BlockLength:
     - spec/**/*
     - config/environments/*
 
+Metrics/MethodLength:
+  Description: 'Checks if the length of a method exceeds some maximum value.'
+  Exclude:
+    - db/migrate/*
+
 Rails/LexicallyScopedActionFilter:
   Description: >-
     This cop checks that methods specified in the filter's `only` or `except` options

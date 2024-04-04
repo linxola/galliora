@@ -15,7 +15,7 @@ export default class extends Controller {
       this.#displayErrors(usernameField, errorsDiv, I18n.username.too_long);
       isValid = false;
     }
-    if (!/^\w?$|^\w[\w.-]+$/.test(usernameField.value)) {
+    if (!/^\w?$|^\w[\w-]+$/.test(usernameField.value)) {
       this.#displayErrors(usernameField, errorsDiv, I18n.username.invalid);
       isValid = false;
     }
