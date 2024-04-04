@@ -1,0 +1,9 @@
+- provide :title, "#{@user.name} (@#{@user.username})"
+
+.container.d-flex.flex-column.align-items-center
+  .text-start.mt-3.w-50
+    %h1.mb-0= @user.name
+    %h3.mb-3= @user.username
+    %p= @user.about
+
+  = link_to 'Edit profile', edit_user_path, class: 'btn btn-light' if current_user == @user

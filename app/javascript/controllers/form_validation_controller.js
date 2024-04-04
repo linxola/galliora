@@ -2,8 +2,8 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   validateUsername() {
-    const usernameField = document.querySelector('#username_form > input');
-    const errorsDiv = document.querySelector('#username_form + .invalid-feedback');
+    const usernameField = document.querySelector('#username > input');
+    const errorsDiv = document.querySelector('#username + .invalid-feedback');
     let isValid = true;
 
     this.#cleanErrors(usernameField, errorsDiv);
@@ -24,8 +24,8 @@ export default class extends Controller {
   }
 
   validateEmail() {
-    const emailField = document.querySelector('#email_form > input');
-    const errorsDiv = document.querySelector('#email_form + .invalid-feedback');
+    const emailField = document.querySelector('#email > input');
+    const errorsDiv = document.querySelector('#email + .invalid-feedback');
     let isValid = true;
 
     this.#cleanErrors(emailField, errorsDiv)
@@ -39,8 +39,8 @@ export default class extends Controller {
   }
 
   validatePassword() {
-    const passwordField = document.querySelector('#password_form > input');
-    const errorsDiv = document.querySelector('#password_form + .invalid-feedback');
+    const passwordField = document.querySelector('#password > input');
+    const errorsDiv = document.querySelector('#password + .invalid-feedback');
     let isValid = true;
 
     this.#cleanErrors(passwordField, errorsDiv)
@@ -64,8 +64,12 @@ export default class extends Controller {
     })
   }
 
-  submitPasswordForm(event) {
+  submitEmailForm(event) {
     if (!this.validateEmail()) { event.preventDefault(); }
+  }
+
+  submitPasswordForm(event) {
+    if (!this.validatePassword()) { event.preventDefault(); }
   }
 
   #displayErrors(target, errorsDiv, errorText) {

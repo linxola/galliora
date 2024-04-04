@@ -7,6 +7,7 @@ Rails.application.routes.draw do
                                     omniauth_callbacks: 'users/omniauth_callbacks' }
 
   devise_scope :user do
+    get 'account', to: 'users/registrations#edit', as: :edit_user
     get 'check_email', to: 'users/confirmations#new', as: :new_user_confirmation
     get 'email_confirmation', to: 'users/confirmations#show', as: :user_confirmation
     post 'email_confirmation', to: 'users/confirmations#create', as: :send_user_confirmation
@@ -18,4 +19,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root 'landing#index'
+
+  get 'users/:id', to: 'users#show', as: :user
 end

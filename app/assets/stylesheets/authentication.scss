@@ -30,7 +30,7 @@
   margin: 0.5rem auto 0;
 }
 
-/* Input field of an input form */
+/* Input field of a form */
 .auth-form .form-control {
   color: white;
   background-color: rgba(255, 255, 255, 0.1);
@@ -74,29 +74,6 @@
   box-shadow: rgba(255, 0, 0, 0.6) 0 0 8px;
 }
 
-/* Password visibility toggle */
-.auth-form #password_form input {
-  padding-right: 3rem;
-}
-
-.auth-form .password-toggle {
-  position: absolute;
-  width: 48px;
-  bottom: 0.6rem;
-  right: 0;
-  font-size: 1.5rem;
-  background-color: transparent;
-}
-
-.auth-form .password-toggle i {
-  cursor: pointer;
-  pointer-events: all;
-}
-
-.auth-form .password-toggle i:hover {
-  color: silver;
-}
-
 /* Remember me checkbox */
 .auth-form .form-check-input {
   background-color: rgba(255, 255, 255, 0.1);
@@ -122,7 +99,7 @@
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(5px);
   padding: 2rem;
-  border-radius: 0.375rem;
+  border-radius: 0.3rem;
   max-width: 400px;
 }
 
@@ -132,18 +109,12 @@
 .auth-form .success-feedback,
 .check-email-content .success-feedback {
   display: block;
-  padding: 10px;
-  background-color: rgba(0, 255, 0, 0.3);
-  border-radius: 0.375rem;
   font-size: 0.875em;
 }
 
 .auth-form .error-feedback,
 .check-email-content .error-feedback {
   display: block;
-  padding: 10px;
-  background-color: rgba(255, 0, 0, 0.3);
-  border-radius: 0.375rem;
   font-size: 0.875em;
 }
 

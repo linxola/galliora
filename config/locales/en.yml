@@ -41,6 +41,8 @@ en:
           too_long: "Username can be maximum 32 characters long"
           invalid: "Username can contain only letters, numbers, underscores, periods and non-leading hyphens"
   user:
+    confirmations:
+      user_delete: 'Please think one more time about your decision. This action is irreversible.'
     helpers:
       confirmation_email_nil: "expired"
     tooltips:

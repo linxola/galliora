@@ -11,7 +11,7 @@
   = form_for(resource, as: resource_name, url: registration_path(resource_name),
                        data: { controller: 'form-validation',
                                action: 'form-validation#submitRegistrationForm' }) do |f|
-    .form-floating#username_form
+    .form-floating#username
       = f.text_field :username, autofocus: true, autocomplete: 'username', class: 'form-control',
                                 placeholder: 'Username',
                                 data: { 'bs-toggle': 'tooltip',
@@ -22,7 +22,7 @@
       = f.label :username
     = render 'shared/error_messages', resource:, field: :username
 
-    .form-floating#email_form
+    .form-floating#email
       = f.text_field :email, autocomplete: 'email', class: 'form-control', placeholder: 'Email',
                              data: { controller: 'form-validation',
                                      action: 'blur->form-validation#validateEmail' }
@@ -30,7 +30,7 @@
     = render 'shared/error_messages', resource:, field: :email
 
     .input-group.has-validation
-      .form-floating#password_form
+      .form-floating.password-form#password
         = f.password_field :password, autocomplete: 'new-password', class: 'form-control',
                                       placeholder: 'Password',
                                       data: { 'bs-toggle': 'tooltip',

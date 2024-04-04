@@ -29,6 +29,13 @@ Metrics/BlockLength:
     - spec/**/*
     - config/environments/*
 
+Rails/LexicallyScopedActionFilter:
+  Description: >-
+    This cop checks that methods specified in the filter's `only` or `except` options
+    are explicitly defined in the class or module.
+  Exclude:
+    - app/controllers/users/*
+
 Rails/LinkToBlank:
   Description: >-
     Checks that `link_to` with a `target: "_blank"` have a `rel: "noopener"` option passed to them.

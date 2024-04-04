@@ -91,4 +91,83 @@ RSpec.describe 'Registrations' do
       end
     end
   end
+
+  describe 'PUT /' do
+    subject(:user_update) do
+      put '/', params: { user: user_params }
+    end
+
+    let(:user) { create(:user, email: 'sms@test.io', username: 'test', password: 'TestPassword') }
+    let(:user_params) { { name: 'Test' } }
+
+    before do
+      sign_in(user)
+      user_update
+    end
+
+    it 'redirects to the same page' do
+      expect(response).to redirect_to(edit_user_path)
+    end
+  end
+
+  describe 'DELETE /' do
+    subject(:user_destroy) do
+      delete '/', params: { user: user_params }
+    end
+
+    let(:user) { create(:user, email: 'sms@test.io', username: 'test', password: 'TestPassword') }
+
+    before { sign_in(user) }
+
+    context 'when current password is correct' do
+      let(:user_params) { { current_password: user.password } }
+
+      it 'destroys the user' do
+        expect { user_destroy }.to change(User, :count).by(-1)
+      end
+
+      it 'creates notice flash message' do
+        user_destroy
+        expect(flash[:notice]).to eq(I18n.t('devise.registrations.destroyed'))
+      end
+
+      it 'redirects to login screen' do
+        user_destroy
+        expect(response).to redirect_to(new_user_session_path)
+      end
+
+      it 'returns http see_other status' do
+        user_destroy
+        expect(response).to have_http_status(:see_other)
+      end
+    end
+
+    context 'when current password is wrong' do
+      let(:user_params) { { current_password: 'Password' } }
+
+      it 'does not destroy the user' do
+        expect { user_destroy }.not_to change(User, :count)
+      end
+
+      it 'creates alert flash message' do
+        user_destroy
+        expect(flash[:alert]).to eq(I18n.t('devise.registrations.destroy_failed'))
+      end
+
+      it 'clears password mismatch error' do
+        user_destroy
+        expect(user.errors).to be_empty
+      end
+
+      it 'does not redirect' do
+        user_destroy
+        expect(response).not_to redirect_to(new_user_session_path)
+      end
+
+      it 'returns http unprocessable_entity status' do
+        user_destroy
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+    end
+  end
 end

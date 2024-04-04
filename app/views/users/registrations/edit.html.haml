@@ -1,45 +1,166 @@
-%h2 Edit #{resource_name.to_s.humanize}
+- provide :title, 'Edit account'
 
-= form_for(resource, as: resource_name, html: { method: :put },
-                     url: registration_path(resource_name)) do |f|
-  = render('devise/shared/error_messages', resource:)
+.bg-black.bg-opacity-10
+  .row.m-0.vh-100
+    .col-md-3.d-flex.align-items-center.justify-content-center.px-0
+      .account-flash.d-none.d-md-block.mt-3
+        = render 'shared/flashes'
+      = link_to user_path(resource), class: 'mx-md-3 mt-3 btn btn-light btn-account-back' do
+        %h1.mb-0
+          %i.bi.bi-arrow-left-square Back
+    .col-md-9.bg-white.px-0
+      .account-flash.d-block.d-md-none
+        = render 'shared/flashes'
+      .container.text-start.my-3.my-md-5.w-75
+        %h2 Public profile settings
 
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: 'email'
+        = form_for(resource, as: resource_name, html: { method: :put },
+                             url: registration_path(resource_name)) do |f|
+          .row.mt-3
+            .col-md-6.col-lg-4
+              .form-floating#username
+                = f.text_field :username, autocomplete: 'username', class: 'form-control',
+                                          placeholder: 'Username',
+                                          data: { 'bs-toggle': 'tooltip',
+                                                  'bs-placement': 'left',
+                                                  'bs-title': I18n.t('user.tooltips.username'),
+                                                  controller: 'form-validation',
+                                                  action: 'blur->form-validation#validateUsername' }
+                = f.label :username
+              = render 'shared/error_messages', resource:, field: :username
 
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-    %div Currently waiting confirmation for: #{resource.unconfirmed_email}
+            .col-md-6.col-lg-8
+              .form-floating
+                = f.text_field :name, autocomplete: 'name', class: 'form-control',
+                                      placeholder: 'Full name'
+                = f.label :name
+              = render 'shared/error_messages', resource:, field: :name
 
-  .field
-    = f.label :password
-    %i (leave blank if you don't want to change it)
-    %br/
-    = f.password_field :password, autocomplete: 'new-password'
-    - if @minimum_password_length
-      %br/
-      %em #{@minimum_password_length} characters minimum
+          .form-floating.mt-md-2
+            = f.text_area :about, class: 'form-control',
+                                  placeholder: 'About you'
+            = f.label :about
+          = render 'shared/error_messages', resource:, field: :about
 
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: 'new-password'
+          = f.submit 'Update', class: 'btn btn-light w-100'
 
-  .field
-    = f.label :current_password
-    %i (we need your current password to confirm your changes)
-    %br/
-    = f.password_field :current_password, autocomplete: 'current-password'
+        %h2.mt-3.mt-md-5 Account settings
 
-  .actions
-    = f.submit 'Update'
+        .my-3
+          = form_for(resource, as: resource_name, html: { method: :put },
+                               url: registration_path(resource_name)) do |f|
+            - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+              .badge.rounded-pill.text-bg-warning.text-wrap.mb-2
+                Currently waiting confirmation for #{resource.unconfirmed_email}
 
-%h3 Cancel my account
+            .row
+              .col-lg-6.col-md-8
+                .form-floating#email
+                  = f.text_field :email, autocomplete: 'email', class: 'form-control',
+                                         placeholder: 'Email',
+                                         data: { controller: 'form-validation',
+                                                 action: 'blur->form-validation#validateEmail' }
+                  = f.label :email
+                = render 'shared/error_messages', resource:, field: :email
 
-%div
-  Unhappy?
-  = button_to 'Cancel my account', registration_path(resource_name),
-              data: { confirm: 'Are you sure?', turbo_confirm: 'Are you sure?' }, method: :delete
+              .col-md-4= f.submit 'Update email', class: 'btn btn-light w-100'
 
-= link_to 'Back', :back
+        .my-3
+          = form_for(resource, as: resource_name, html: { method: :put },
+                               url: registration_path(resource_name),
+                               data: { controller: 'form-validation',
+                                       action: 'form-validation#submitPasswordForm' }) do |f|
+            .row
+              .col-xl-4.col-md-6
+                .input-group.has-validation
+                  .form-floating.password-form#password
+                    = f.password_field :password, autocomplete: 'new-password',
+                                                  class: 'form-control',
+                                                  placeholder: 'New password',
+                                                  data: { 'bs-toggle': 'tooltip',
+                                                          'bs-placement': 'left',
+                                                          'bs-title': I18n.t('user.tooltips.password'),
+                                                          controller: 'form-validation',
+                                                          action: 'blur->form-validation#validatePassword' }
+                    = f.label :password, 'New password'
+                    %span.password-toggle
+                      %i.bi.bi-eye{ 'data-controller': 'password',
+                                    'data-password-target': 'visibilityIcon',
+                                    'data-action': 'click->password#switchVisibility' }
+                  = render 'shared/error_messages', resource:, field: :password
+
+              .col-xl-4.col-md-6
+                .input-group.has-validation
+                  .form-floating.password-form
+                    = f.password_field :current_password, autocomplete: 'current-password',
+                                                          class: 'form-control',
+                                                          placeholder: 'Current password'
+                    = f.label :current_password
+                    %span.password-toggle
+                      %i.bi.bi-eye{ 'data-controller': 'password',
+                                    'data-password-target': 'visibilityIcon',
+                                    'data-action': 'click->password#switchVisibility' }
+                  = render 'shared/error_messages', resource:, field: :current_password
+
+              .col-xl-4= f.submit 'Update password', class: 'btn btn-light w-100'
+
+        - if resource.github_uid.present? || resource.google_uid.present?
+          %h2.mt-3.mt-md-5 Connected accounts
+          .row
+            - if resource.github_uid.present?
+              .col-xxl-2.col-lg-3.col-sm-4
+                .card
+                  .card-body.text-center
+                    %h1.card-title
+                      %i.bi.bi-github
+                    %h6.card-subtitle GitHub
+                    %p.card-text
+                      .badge.rounded-pill.text-bg-success Connected
+            - if resource.google_uid.present?
+              .col-xxl-2.col-lg-3.col-sm-4
+                .card
+                  .card-body.text-center
+                    %h1.card-title
+                      %i.bi.bi-google
+                    %h6.card-subtitle Google
+                    %p.card-text
+                      .badge.rounded-pill.text-bg-success Connected
+
+        %h2.text-danger.mt-3.mt-md-5 Cancel account
+
+        .border.rounded.border-danger.p-3
+          %p Once you delete your account, there is no going back. Please be certain.
+          %button.btn.btn-light-danger{ 'data-bs-target': '#cancel_modal',
+                                        'data-bs-toggle': 'modal' }
+            Cancel my account
+          .modal.fade#cancel_modal{ 'aria-hidden': 'true', 'aria-labelledby': 'cancel_modal_label',
+                                    tabindex: '-1' }
+            .modal-dialog.modal-dialog-centered
+              .modal-content
+                .modal-header
+                  %h1.modal-title.fs-5#cancel_modal_label Are you sure?
+                  %button.btn-close{ 'aria-label': 'Close', 'data-bs-dismiss': 'modal' }
+                .modal-body
+                  %p.text-danger
+                    %i.bi.bi-exclamation-diamond
+                    In case you choose to proceed, your data will be lost forever.
+                  %p
+                    If you are certain about your decision,
+                    please enter current password and press the button.
+                    We will miss you!
+                  = form_for(resource, as: resource_name, html: { method: :delete },
+                                       url: registration_path(resource_name),
+                                       data: { confirm: I18n.t('user.confirmations.user_delete'),
+                                               turbo_confirm: I18n.t('user.confirmations.user_delete') }) do |f|
+                    .input-group.has-validation
+                      .form-floating.password-form
+                        = f.password_field :current_password, autocomplete: 'current-password',
+                                                              class: 'form-control rounded',
+                                                              placeholder: 'Current password'
+                        = f.label :current_password
+                        %span.password-toggle
+                          %i.bi.bi-eye{ 'data-controller': 'password',
+                                        'data-password-target': 'visibilityIcon',
+                                        'data-action': 'click->password#switchVisibility' }
+
+                      = f.submit 'Cancel my account', class: 'btn btn-light-danger rounded w-100'
