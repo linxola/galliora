@@ -8,7 +8,7 @@ RSpec.describe User do
     it { is_expected.to validate_uniqueness_of(:username).case_insensitive }
 
     # Testing format's validation of username field
-    it { is_expected.to allow_value('_User.Name-99_').for(:username) }
+    it { is_expected.to allow_value('_UserName-99_').for(:username) }
     it { is_expected.to allow_value('user').for(:username) }
     it { is_expected.not_to allow_value('-ab').for(:username) }
     it { is_expected.not_to allow_value('abc$%^&*').for(:username) }

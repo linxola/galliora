@@ -18,7 +18,7 @@ RSpec.describe 'Sessions' do
       before { post_log_in }
 
       it 'redirects to the user profile page' do
-        expect(response).to redirect_to(user_path(user.id))
+        expect(response).to redirect_to(user_path('test'))
       end
 
       it 'returns http see_other status' do
@@ -32,7 +32,7 @@ RSpec.describe 'Sessions' do
       before { post_log_in }
 
       it 'redirects to the user profile page' do
-        expect(response).to redirect_to(user_path(user.id))
+        expect(response).to redirect_to(user_path('test'))
       end
 
       it 'returns http see_other status' do

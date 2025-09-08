@@ -20,7 +20,9 @@ RSpec.describe 'OmniauthCallbacks' do
     end
 
     context 'when user already exists in the database with connected GitHub account' do
-      let(:user) { create(:user, github_uid: '12345678', email: 'wordi@email.com') }
+      let(:user) do
+        create(:user, username: 'nick', github_uid: '12345678', email: 'wordi@email.com')
+      end
 
       before { user }
 
@@ -40,7 +42,7 @@ RSpec.describe 'OmniauthCallbacks' do
 
       it 'redirects to the user profile page' do
         omniauth_callback
-        expect(response).to redirect_to(user_path(user.id))
+        expect(response).to redirect_to(user_path('nick'))
       end
 
       it 'returns http found status' do
@@ -49,8 +51,8 @@ RSpec.describe 'OmniauthCallbacks' do
       end
     end
 
-    context 'when user with the same email already exists in the database' do
-      let(:user) { create(:user, github_uid: nil, email: 'hello@email.com') }
+    context 'when user with the same email and username already exists in the database' do
+      let(:user) { create(:user, username: 'nick', github_uid: nil, email: 'hello@email.com') }
 
       before { user }
 
@@ -70,7 +72,7 @@ RSpec.describe 'OmniauthCallbacks' do
 
       it 'redirects to the user profile page' do
         omniauth_callback
-        expect(response).to redirect_to(user_path(user.id))
+        expect(response).to redirect_to(user_path('nick'))
       end
 
       it 'returns http found status' do
@@ -115,7 +117,7 @@ RSpec.describe 'OmniauthCallbacks' do
 
       it 'redirects to the user profile page' do
         omniauth_callback
-        expect(response).to redirect_to(user_path(User.last.id))
+        expect(response).to redirect_to(user_path('wordi'))
       end
 
       it 'returns http found status' do
@@ -177,7 +179,12 @@ RSpec.describe 'OmniauthCallbacks' do
     end
 
     context 'when user already exists in the database with connected Google account' do
-      let(:user) { create(:user, google_uid: '123456789012345678901', email: 'wordi@gmail.com') }
+      let(:user) do
+        create(:user,
+               username: 'nick',
+               google_uid: '123456789012345678901',
+               email: 'wordi@gmail.com')
+      end
 
       before { user }
 
@@ -197,7 +204,7 @@ RSpec.describe 'OmniauthCallbacks' do
 
       it 'redirects to the user profile page' do
         omniauth_callback
-        expect(response).to redirect_to(user_path(user.id))
+        expect(response).to redirect_to(user_path('nick'))
       end
 
       it 'returns http found status' do
@@ -207,7 +214,7 @@ RSpec.describe 'OmniauthCallbacks' do
     end
 
     context 'when user already exists in the database' do
-      let(:user) { create(:user, google_uid: nil, email: 'hello@gmail.com') }
+      let(:user) { create(:user, username: 'nick', google_uid: nil, email: 'hello@gmail.com') }
 
       before { user }
 
@@ -227,7 +234,7 @@ RSpec.describe 'OmniauthCallbacks' do
 
       it 'redirects to the user profile page' do
         omniauth_callback
-        expect(response).to redirect_to(user_path(user.id))
+        expect(response).to redirect_to(user_path('nick'))
       end
 
       it 'returns http found status' do
@@ -272,7 +279,7 @@ RSpec.describe 'OmniauthCallbacks' do
 
       it 'redirects to the user profile page' do
         omniauth_callback
-        expect(response).to redirect_to(user_path(User.last.id))
+        expect(response).to redirect_to(user_path('hello'))
       end
 
       it 'returns http found status' do
