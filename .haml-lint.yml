@@ -1,0 +1,10 @@
+linters:
+  IdNames:
+    style: snake_case
+  
+  InlineStyles:
+    enabled: false
+
+  LineLength:
+    max: 100
+    exclude: 'app/views/**/mailer/*.text.haml'

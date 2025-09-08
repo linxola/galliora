@@ -1,0 +1,6 @@
+.invalid-feedback
+  - if resource.errors.include?(field)
+    - resource.errors[field].each do |row|
+      %i.bi.bi-exclamation-circle
+      #{field.capitalize} #{row}
+      %br

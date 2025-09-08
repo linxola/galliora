@@ -1,0 +1,53 @@
+- provide :title, 'Join Galliora'
+
+.bg-blur= render 'shared/background_image'
+
+.content-center.auth-form
+  %h1 Join Galliora
+  .subtitle-link
+    Already have an account?
+    = link_to 'Log in', new_session_path(resource_name), class: 'link-light'
+
+  = form_for(resource, as: resource_name, url: registration_path(resource_name),
+                       data: { controller: 'form-validation',
+                               action: 'form-validation#submitRegistrationForm' }) do |f|
+    .form-floating#username
+      = f.text_field :username, autofocus: true, autocomplete: 'username', class: 'form-control',
+                                placeholder: 'Username',
+                                data: { 'bs-toggle': 'tooltip',
+                                        'bs-placement': 'right',
+                                        'bs-title': I18n.t('user.tooltips.username'),
+                                        controller: 'form-validation',
+                                        action: 'blur->form-validation#validateUsername' }
+      = f.label :username
+    = render 'shared/error_messages', resource:, field: :username
+
+    .form-floating#email
+      = f.text_field :email, autocomplete: 'email', class: 'form-control', placeholder: 'Email',
+                             data: { controller: 'form-validation',
+                                     action: 'blur->form-validation#validateEmail' }
+      = f.label :email
+    = render 'shared/error_messages', resource:, field: :email
+
+    .input-group.has-validation
+      .form-floating.password-form#password
+        = f.password_field :password, autocomplete: 'new-password', class: 'form-control',
+                                      placeholder: 'Password',
+                                      data: { 'bs-toggle': 'tooltip',
+                                              'bs-placement': 'right',
+                                              'bs-title': I18n.t('user.tooltips.password'),
+                                              controller: 'form-validation',
+                                              action: 'blur->form-validation#validatePassword' }
+        = f.label :password
+        %span.password-toggle
+          %i.bi.bi-eye{ 'data-controller': 'password',
+                        'data-password-target': 'visibilityIcon',
+                        'data-action': 'click->password#switchVisibility' }
+      = render 'shared/error_messages', resource:, field: :password
+
+    = render 'shared/recaptcha', action: 'registration',
+                                 show_checkbox_recaptcha: @show_checkbox_recaptcha
+
+    = f.submit 'SIGN UP', class: 'btn btn-light w-100'
+
+  = render 'users/shared/omniauth_buttons'

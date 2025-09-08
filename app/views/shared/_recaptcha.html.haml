@@ -1,0 +1,8 @@
+.recaptcha
+  - if show_checkbox_recaptcha
+    #recaptcha_v2{ 'data-controller': 'recaptcha-v2-load',
+                   'data-recaptcha-v2-load-site-key-value': ENV.fetch('RECAPTCHA_SITE_KEY_V2') }
+  - else
+    = recaptcha_v3(action:, site_key: ENV.fetch('RECAPTCHA_SITE_KEY_V3'), turbo: true)
+  .invalid-feedback
+    = flash[:recaptcha_error]

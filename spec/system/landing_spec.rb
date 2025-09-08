@@ -9,13 +9,13 @@ RSpec.describe 'Landing page' do
     expect(page).to have_content('Welcome to Galliora!')
   end
 
-  it 'shows link-button that redirects user to home page or login/register screen' do
+  it 'shows link-button that redirects user to home page or login screen' do
     click_link 'Explore'
 
-    expect(page).to have_current_path('/')
+    expect(page).to have_current_path(new_user_session_url)
   end
 
   it 'shows a link to an author of a background image' do
-    expect(page).to have_link('Yves from Pixabay', href: 'https://pixabay.com/users/ykaiavu-7068951/')
+    expect(page).to have_link('Andy Bay from Pixabay', href: 'https://pixabay.com/users/andy_bay-1006510/')
   end
 end

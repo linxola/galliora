@@ -1,4 +1,236 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css");
 
+@import "authentication";
 @import "landing";
+
+/********************/
+/* Background image */
+/********************/
+.bg-img {
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/*****************************/
+/* Background image's author */
+/*****************************/
+.bg-img-author {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 1;
+  color: white;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+/**********************/
+/* Background overlay */
+/**********************/
+.bg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  opacity: 0.5;
+}
+
+/*****************************************/
+/* Center elements with background image */
+/*****************************************/
+.content-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+}
+
+/**********************/
+/* White & gray links */
+/**********************/
+.link-light {
+  color: white;
+  transition: color .3s;
+  white-space: nowrap;
+}
+
+.link-light:hover {
+  color: gray !important;
+}
+
+/***********/
+/* Tooltip */
+/***********/
+.tooltip-inner {
+  background-color: white;
+  color: black;
+}
+
+/***********************************/
+/* Back from account screen button */
+/***********************************/
+.btn-account-back {
+  height: 25%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*****************************************/
+/* White button with transition to black */
+/*****************************************/
+.btn-light {
+  background-color: whitesmoke;
+  margin: 0.5rem auto;
+  border: none;
+  padding: 10px;
+  text-align: center;
+  transition: background-color .3s, color .3s, box-shadow .3s;
+  white-space: normal;
+}
+
+.btn-light:hover {
+  background-color: black;
+  color: white;
+  box-shadow: rgba(255, 255, 255, 0.6) 0 0 8px;
+}
+
+/*****************************************/
+/* White button with transition to red */
+/*****************************************/
+.btn-light-danger {
+  color: red;
+  background-color: whitesmoke;
+  margin: 0.5rem auto;
+  border: none;
+  padding: 10px;
+  text-align: center;
+  transition: background-color .3s, color .3s, box-shadow .3s;
+  white-space: normal;
+}
+
+.btn-light-danger:hover {
+  background-color: red;
+  color: white;
+  box-shadow: rgba(255, 255, 255, 0.6) 0 0 8px;
+}
+
+/******************************/
+/* Password visibility toggle */
+/******************************/
+.password-form input {
+  padding-right: 3rem;
+}
+
+.password-toggle {
+  position: absolute;
+  width: 48px;
+  bottom: 0.6rem;
+  right: 0;
+  font-size: 1.5rem;
+  background-color: transparent;
+}
+
+.password-toggle i {
+  cursor: pointer;
+  pointer-events: all;
+}
+
+.password-toggle i:hover {
+  color: silver;
+}
+
+/*************************/
+/* Input field of a form */
+/*************************/
+.form-control {
+  transition: background .3s, border .3s, box-shadow .3s;
+}
+
+.form-control:focus {
+  border-color: #0057B7;
+  box-shadow: rgba(0, 87, 183, 0.25) 0 0 0 0.2rem;
+}
+.form-control:hover {
+  box-shadow: rgba(0, 87, 183, 0.25) 0 0 0 0.2rem;
+}
+
+/* Class of the field with invalid input */
+.is-invalid {
+  border-color: red;
+  background-image: none !important;
+  padding-right: 0.75rem;
+}
+
+.is-invalid:focus,
+.is-invalid:hover {
+  box-shadow: rgba(255, 0, 0, 0.25) 0 0 0 0.2rem;
+}
+
+/* Input field's errors div */
+.invalid-feedback {
+  display: block;
+  text-align: start;
+  padding-left: 1.5%;
+}
+
+/*************************************/
+/* Success and error flashes styling */
+/*************************************/
+.account-flash {
+  position: absolute;
+  left: 0;
+  top: $spacer;
+  width: inherit;
+  border: 1rem solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.success-feedback {
+  padding: 10px;
+  background-color: rgba(0, 255, 0, 0.3);
+  border-radius: 0.3rem;
+}
+
+.error-feedback {
+  padding: 10px;
+  background-color: rgba(255, 0, 0, 0.3);
+  border-radius: 0.3rem;
+}
+
+/****************************/
+/* Small screens adaptation */
+/****************************/
+@media (max-width: 768px) {
+  .btn-account-back {
+    height: 100%;
+    width: 100%;
+  }
+
+  .account-flash {
+    position: initial;
+    border: 0;
+    text-align: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .bg-img-author {
+    font-size: smaller;
+    max-width: 75%;
+  }
+
+  .content-center {
+    width: 75%;
+  }
+}

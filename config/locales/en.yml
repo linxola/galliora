@@ -28,4 +28,26 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  javascript:
+    user:
+      validations:
+        email:
+          invalid: "Email has invalid format"
+        password:
+          too_short: "Password must be minimum 8 characters long"
+          too_long: "Password can be maximum 128 characters long"
+        username:
+          too_short: "Username must be minimum 2 characters long"
+          too_long: "Username can be maximum 32 characters long"
+          invalid: "Username can contain only letters, numbers, underscores and non-leading hyphens"
+  user:
+    confirmations:
+      user_delete: 'Please think one more time about your decision. This action is irreversible.'
+    helpers:
+      confirmation_email_nil: "expired"
+    tooltips:
+      password: "Password must be minimum 8 characters long"
+      username: "Username must be 2-32 long and can contain only letters, numbers, underscores and non-leading hyphens"
+    validations:
+      username:
+        invalid: "can contain only letters, numbers, underscores and non-leading hyphens"
